@@ -1,0 +1,23 @@
+#./kenney_onscreencontrols
+Source: https://www.kenney.nl/assets/onscreen-controls
+License: CC0 1.0 Universal
+
+#./kenney_uiaudio
+Source: https://www.kenney.nl/assets/ui-audio
+License: CC0 1.0 Universal
+
+#./kenney_interfacesounds
+Source: https://www.kenney.nl/assets/interface-sounds
+License: CC0 1.0 Universal
+
+#./kenney_prototypetextures
+Source: https://www.kenney.nl/assets/prototype-textures
+License: CC0 1.0 Universal
+
+#./kenney_particlepack
+Source: https://www.kenney.nl/assets/particle-pack
+License: CC0 1.0 Universal
+
+#./dogica
+Source: https://www.dafont.com/dogica.font
+License: OFL

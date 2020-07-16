@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Displacement1.obj-5e8f52532f051e6f20e5eed737d57e56.mesh"
+
+[deps]
+
+files=[ "res://.import/Displacement1.obj-5e8f52532f051e6f20e5eed737d57e56.mesh" ]
+
+source_file="res://assets/devworld/meshes/Displacement1.obj"
+dest_files=[ "res://.import/Displacement1.obj-5e8f52532f051e6f20e5eed737d57e56.mesh", "res://.import/Displacement1.obj-5e8f52532f051e6f20e5eed737d57e56.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/ArchSlide.obj-b9336fc3f64f47d4ef41ad602e07c2c8.mesh"
+
+[deps]
+
+files=[ "res://.import/ArchSlide.obj-b9336fc3f64f47d4ef41ad602e07c2c8.mesh" ]
+
+source_file="res://assets/devworld/meshes/ArchSlide.obj"
+dest_files=[ "res://.import/ArchSlide.obj-b9336fc3f64f47d4ef41ad602e07c2c8.mesh", "res://.import/ArchSlide.obj-b9336fc3f64f47d4ef41ad602e07c2c8.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

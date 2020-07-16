@@ -1,0 +1,6 @@
+/.import/
+/bin/
+
+# System/tool-specific ignores
+.directory
+*~
