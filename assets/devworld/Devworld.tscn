@@ -38,6 +38,8 @@ orientator = NodePath("../../Devworld/CameraArm")
 [node name="CameraArm" parent="." instance=ExtResource( 3 )]
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -1.74484, 0, 2.8026e-45 )
 lerp_targets = [ NodePath("../P1"), NodePath("../P2") ]
+follow_speed = 2
+rotate_speed = 6
 distance = 19
 
 [node name="Camera" parent="CameraArm" index="0"]
