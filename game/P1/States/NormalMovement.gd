@@ -6,19 +6,19 @@ var last_transform := Transform()
 
 var air_time := 0.0
 var discounted_air_time := 0.0
+var player_was_jumping = false
+var jump_time := 0.0
 
 # Impulse forces
-export var gravity := 9.8
+export var gravity := 9.8 * 44
 export var friction := 3.6
 export var speed := 30.0
-export var jump_impulse := 1000.0
+export var jump_speed := 120.0
 
 # Gameplay altering variables
 export (float, 0, 0.5) var coyote_time = 0.2
 ## Max amount of time where holding the jump button adds force (in seconds)
-export var max_jump_time := 0.2
-var was_jumping_last_frame = false
-var jump_time := 0.0
+export var max_jump_time := 1.0/12.0
 
 func enter_state(_player: KinematicBody, _extra_info):
 	pass
@@ -28,16 +28,13 @@ func exit_state(_player: KinematicBody, _extra_info) -> bool:
 	last_transform = Transform()
 	air_time = 0.0
 	discounted_air_time = 0.0
-	was_jumping_last_frame = false
+	player_was_jumping = false
 	jump_time = 0.0
 	return true
 
-func get_gravity_impulse():
-	# Gravity gets stronger the longer the jump (so jumps feel sharper) and there's
-	# also a short buffer of coyote time.
-	# We don't need to multiply by delta since we're already relating 
-	# it to time via _air_time_ 
-	return Vector3.DOWN * gravity * clamp(air_time - discounted_air_time, 0, INF) / 2
+func get_gravity_impulse(delta):
+	# Gravity gets stronger the longer the player is on air
+	return Vector3.DOWN * gravity * clamp(air_time - discounted_air_time, 0, INF) * delta
 
 func get_pushable_collision(player: KinematicBody):
 	for i in player.get_slide_count():
@@ -46,10 +43,38 @@ func get_pushable_collision(player: KinematicBody):
 			return col
 	return null
 
+func can_jump(player: KinematicBody):
+	var can_begin_jump = \
+		air_time <= coyote_time and not player_was_jumping
+	var can_continue_jump = \
+		player_was_jumping and jump_time <= max_jump_time and not player.is_on_floor()
+	return can_begin_jump or can_continue_jump
+
+func get_jump_impulse(delta, player: KinematicBody, direction: Vector2):
+	var ret = Vector3.ZERO
+	if Input.is_action_pressed(player.get_name() + "_jump") and can_jump(player):
+		var jump_completion = jump_time / max_jump_time
+		# We don't need to multiply by delta since we're already relating 
+		# it to time via jump_completion.
+		# (1 - jump_completion) means the jump gets weaker as it gets
+		# closer to it`s max time.
+		ret.y += jump_speed * (1 - jump_completion) * delta
+		# Boost the player a little in the direction of the jump
+		if jump_time <= 0.03 :
+			ret += utils.v2_to_v3(direction) * jump_speed * delta * (1 - jump_completion) / 3
+		
+		discounted_air_time = air_time
+		player_was_jumping = true
+		jump_time += delta
+	else:
+		player_was_jumping = false
+	
+	return ret
+
 func snap_to_ground(_player: KinematicBody):
 	pass
 #	var floor_dist = player.floor_distance()
-#	if floor_dist >= 0.4 and floor_dist <= 0.6 and not was_jumping_last_frame:
+#	if floor_dist >= 0.4 and floor_dist <= 0.6 and not player_was_jumping:
 #		player.move_and_collide(Vector3(0, -floor_dist, 0), false)
 
 func do_state(delta: float, player: KinematicBody):
@@ -57,21 +82,16 @@ func do_state(delta: float, player: KinematicBody):
 	discounted_air_time = 0.0 if player.is_on_floor() else discounted_air_time
 	jump_time = 0.0 if player.is_on_floor() else jump_time
 	snap_to_ground(player)
-
-	var impulse = utils.v2_to_v3(player.get_oriented_directional_input()) + get_gravity_impulse()
-	if Input.is_action_pressed(player.get_name() + "_jump") and \
-		(player.is_on_floor() or was_jumping_last_frame or air_time <= coyote_time) and \
-		jump_time < max_jump_time:
-		discounted_air_time = air_time
-		was_jumping_last_frame = true
-		impulse.y += jump_impulse * delta * clamp(max_jump_time - jump_time, 0, INF)
-		jump_time += delta
-	else: 
-		was_jumping_last_frame = false
-
-	if inertia.length() + impulse.length() >= 0.1:
+	
+	var directional_impulse = player.get_oriented_directional_input()
+	var jump_impulse = get_jump_impulse(delta, player, directional_impulse)
+	# gravity_impulse must come after jump_impulse since it sets discounted_air_time
+	var gravity_impulse = get_gravity_impulse(delta)
+	var total_impulse = \
+		utils.v2_to_v3(directional_impulse * delta * speed) + gravity_impulse + jump_impulse
+	if inertia.length() + total_impulse.length() >= 0.1:
 		inertia = player.move_and_slide(
-			impulse * delta * speed + inertia,
+			total_impulse + inertia,
 			Vector3.UP,
 			true, 4, deg2rad(46), false
 		) * (1 - friction * delta)
@@ -83,7 +103,7 @@ func do_state(delta: float, player: KinematicBody):
 			# and the pushable's origin is at it's center of mass.
 			# Also only allow changing the state if the player is actually trying
 			# to move against a pushable and not being pushed into one.
-			if col and col.normal.y < 0.2 and rad2deg((impulse + inertia).angle_to(-col.normal)) <= 90:
+			if col and col.normal.y < 0.2 and rad2deg(inertia.angle_to(-col.normal)) <= 90:
 				player.change_state($"../AgainstPushable", {"pushable": col.collider})
 
 func do_state_visual(delta: float, player: KinematicBody):
