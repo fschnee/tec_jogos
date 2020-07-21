@@ -1,6 +1,9 @@
 /.import/
 /bin/
 
+*.TMP
+*.blend1
+
 # System/tool-specific ignores
 .directory
 *~
