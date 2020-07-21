@@ -19,3 +19,23 @@ static func look_at_local_with_interp(obj, target, time, up = Vector3.UP):
 
 static func raycast_col_distance(raycast: RayCast):
 	return raycast.global_transform.origin.distance_to(raycast.get_collision_point())
+
+static func v2_to_v3(vec: Vector2) -> Vector3:
+	return Vector3(vec.x, 0, vec.y)
+
+static func v3_to_v2(vec: Vector3) -> Vector2:
+	return Vector2(vec.x, vec.z)
+
+# Returns the old parent.
+static func reparent(node: Node, new_parent: Node) -> Node:
+	var old_parent = node.get_parent()
+	old_parent.remove_child(node)
+	new_parent.add_child(node)
+	return old_parent
+
+# Returns the old parent.
+static func reparent_with_transform(node: Spatial, new_parent: Spatial) -> Node:
+	var old_transform = node.global_transform
+	var old_parent = reparent(node, new_parent)
+	node.global_transform = old_transform
+	return old_parent

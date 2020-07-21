@@ -15,7 +15,7 @@ background_energy = 1.53
 ambient_light_color = Color( 0.654902, 0.792157, 0.933333, 1 )
 ssao_enabled = true
 
-[node name="Spatial" type="Spatial"]
+[node name="Devworld" type="Spatial"]
 
 [node name="Environment" parent="." instance=ExtResource( 1 )]
 
@@ -26,16 +26,22 @@ light_energy = 0.66
 light_specular = 0.0
 shadow_enabled = true
 shadow_color = Color( 0.0235294, 0.360784, 0.505882, 1 )
+shadow_bias = 0.0
 
 [node name="P1" parent="." instance=ExtResource( 2 )]
-orientator = NodePath("../CameraArm")
+orientator = NodePath("../../Devworld/CameraArm")
+
+[node name="P2" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.48969, 0, 0 )
+orientator = NodePath("../../Devworld/CameraArm")
 
 [node name="CameraArm" parent="." instance=ExtResource( 3 )]
-transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 2.8026e-45 )
-lerp_targets = [ NodePath("../P1") ]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -1.74484, 0, 2.8026e-45 )
+lerp_targets = [ NodePath("../P1"), NodePath("../P2") ]
+distance = 19
 
 [node name="Camera" parent="CameraArm" index="0"]
-transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 20, 20 )
+transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 19, 19 )
 projection = 1
 fov = 38.9
 size = 30.0
