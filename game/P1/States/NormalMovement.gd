@@ -99,15 +99,15 @@ func do_state_visual(delta: float, player: KinematicBody):
 	
 	if not globals.do_player_debug:
 		player.get_node("DebugGizmo").hide()
-		return
-	player.get_node("DebugGizmo").show()
+	else:
+		player.get_node("DebugGizmo").show()
 	
-	if inertia and inertia != last_inertia:
-		utils.look_at_local(player.get_node("DebugGizmo/InertiaController"), inertia * Vector3(1, 0, 1))
-	var directional = utils.v2_to_v3(player.get_oriented_directional_input())
-	utils.look_at_local(player.get_node("DebugGizmo/DirectionalController"), directional)
-	var scale = directional.length()
-	player.get_node("DebugGizmo/DirectionalController/Arrow").scale = Vector3(scale, clamp(scale, 0, 1), scale)
+		if inertia and inertia != last_inertia:
+			utils.look_at_local(player.get_node("DebugGizmo/InertiaController"), inertia * Vector3(1, 0, 1))
+		var directional = utils.v2_to_v3(player.get_oriented_directional_input())
+		utils.look_at_local(player.get_node("DebugGizmo/DirectionalController"), directional)
+		var scale = directional.length()
+		player.get_node("DebugGizmo/DirectionalController/Arrow").scale = Vector3(scale, clamp(scale, 0, 1), scale)
 	
 	last_inertia = inertia
 	last_transform = player.global_transform
