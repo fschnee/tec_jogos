@@ -39,7 +39,7 @@ func get_gravity_impulse(delta):
 func get_pushable_collision(player: KinematicBody):
 	for i in player.get_slide_count():
 		var col = player.get_slide_collision(i)
-		if col and col.collider.is_in_group("Pushable"):
+		if col and col.collider is PushableBox:
 			return col
 	return null
 

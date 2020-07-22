@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "RigidBody",
+"class": "PushableBox",
+"language": "GDScript",
+"path": "res://game/Common/PushableBox.gd"
+}, {
 "base": "Node",
 "class": "utils",
 "language": "GDScript",
 "path": "res://game/Utils.gd"
 } ]
 _global_script_class_icons={
+"PushableBox": "",
 "utils": ""
 }
 

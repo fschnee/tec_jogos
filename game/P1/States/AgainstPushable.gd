@@ -3,7 +3,7 @@ extends Node
 export var push_impulse := 15
 export (float, 0, 1) var deadzone = 0.1
 
-var pushable: RigidBody = null
+var pushable: PushableBox = null
 var normal := Vector3.ZERO
 
 func goes_toward_normal(vec: Vector3):
@@ -30,7 +30,7 @@ func do_state(delta: float, player: KinematicBody):
 		player.change_state($"../NormalMovement")
 		return
 	
-	if pushable_speed.length() <= 2.5:
+	if pushable.allow_push_by(player.get_name()) and pushable_speed.length() <= 2.5:
 		pushable.apply_central_impulse(directional * delta * push_impulse)
 
 	player.move_and_slide(distance * pushable_speed.length(), Vector3.UP, true, 4, deg2rad(46), false)
