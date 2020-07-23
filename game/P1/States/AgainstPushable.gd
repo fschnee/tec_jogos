@@ -23,10 +23,10 @@ func do_state(delta: float, player: KinematicBody):
 		pushable.global_transform.origin * Vector3(1, 0, 1) - player.global_transform.origin * Vector3(1, 0, 1)
 	normal = (-distance).normalized()
 	
-	if pushable_speed.length() >= 3 \
-		or pushable_speed.y >= 0.1 or \
-		(directional.length() >= deadzone and goes_toward_normal(directional)) \
-		or distance.length() >= 2.5:
+	if pushable_speed.length() >= 3 or \
+		pushable_speed.y >= 1 or \
+		(directional.length() >= deadzone and goes_toward_normal(directional)) or \
+		distance.length() >= 2.5:
 		player.change_state($"../NormalMovement")
 		return
 	
