@@ -36,18 +36,17 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.48969, 0, 0 )
 orientator = NodePath("../../Devworld/CameraArm")
 
 [node name="CameraArm" parent="." instance=ExtResource( 3 )]
-transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -1.74484, 0, 2.8026e-45 )
+transform = Transform( 0.707104, 0, 0.707109, 0, 1, 0, -0.707109, 0, 0.707104, -1.74485, 0, 0 )
 lerp_targets = [ NodePath("../P1"), NodePath("../P2") ]
-follow_speed = 2
-rotate_speed = 6
-distance = 19
+camera_angle = -54.736
 
 [node name="Camera" parent="CameraArm" index="0"]
-transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 19, 19 )
+transform = Transform( 1, 0, 0, 0, 0.577345, 0.816501, 0, -0.816501, 0.577345, 0, 16.33, 11.5469 )
 projection = 1
-fov = 38.9
+fov = 20.0
 size = 30.0
 near = 0.1
+far = 1000.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 2 )
