@@ -20,9 +20,13 @@ func _ready():
 	for t in lerp_targets:
 		_lerp_targets.append(get_node(t))
 
+# TODO: reposition camera only when $Camera.get_rotation().x or 
+# distance changes instead of at every _physics_process.
 func _physics_process(delta):
-	# Set the camera _distance_ away
-	$Camera.set_translation(Vector3(0, distance, distance))
+	# Set the camera _distance_ away (basic trig).
+	var y_dist = sin(abs($Camera.get_rotation().x)) * distance
+	var z_dist = sqrt(distance * distance - y_dist * y_dist)
+	$Camera.set_translation(Vector3(0, y_dist, z_dist))
 
 	# Then rotate to the arm to the right angle
 	target_rot = wrapi(
