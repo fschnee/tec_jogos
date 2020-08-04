@@ -1,0 +1,305 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://assets/Player/meshes/Cloak.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://game/Player/AnimController.gd" type="Script" id=2]
+[ext_resource path="res://game/Player/Cloak.gd" type="Script" id=3]
+[ext_resource path="res://assets/Player/Player.material" type="Material" id=4]
+[ext_resource path="res://assets/Player/Cloak.material" type="Material" id=5]
+[ext_resource path="res://assets/Player/meshes/Model.glb" type="PackedScene" id=6]
+
+[sub_resource type="AnimationNodeAnimation" id=1]
+animation = "D3_idle_cycle"
+
+[sub_resource type="AnimationNodeBlend2" id=2]
+sync = true
+
+[sub_resource type="AnimationNodeBlend2" id=3]
+
+[sub_resource type="AnimationNodeAnimation" id=4]
+animation = "D3_push_cycle"
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "D3_idle_pose"
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "D3_move_cycle"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id=7]
+blend_point_0/node = SubResource( 5 )
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource( 6 )
+blend_point_1/pos = 1.0
+
+[sub_resource type="AnimationNodeBlendTree" id=8]
+graph_offset = Vector2( -170.043, 8 )
+nodes/idle_animation/node = SubResource( 1 )
+nodes/idle_animation/position = Vector2( 180, 100 )
+nodes/is_idle/node = SubResource( 2 )
+nodes/is_idle/position = Vector2( 580, -20 )
+nodes/is_pushing/node = SubResource( 3 )
+nodes/is_pushing/position = Vector2( 760, 60 )
+nodes/output/position = Vector2( 1000, -20 )
+nodes/push_animation/node = SubResource( 4 )
+nodes/push_animation/position = Vector2( 540, 160 )
+nodes/run_speed/node = SubResource( 7 )
+nodes/run_speed/position = Vector2( 180, -20 )
+node_connections = [ "output", 0, "is_pushing", "is_pushing", 0, "is_idle", "is_pushing", 1, "push_animation", "is_idle", 0, "run_speed", "is_idle", 1, "idle_animation" ]
+
+[sub_resource type="BoxShape" id=9]
+extents = Vector3( 0.058153, 0.297817, 0.0879971 )
+
+[sub_resource type="BoxShape" id=10]
+extents = Vector3( 0.084398, 0.340449, 0.11827 )
+
+[sub_resource type="BoxShape" id=11]
+extents = Vector3( 0.229426, 0.0767601, 0.13383 )
+
+[sub_resource type="BoxShape" id=12]
+extents = Vector3( 0.210986, 0.134034, 0.133827 )
+
+[sub_resource type="BoxShape" id=13]
+extents = Vector3( 0.217835, 0.0853218, 0.126132 )
+
+[sub_resource type="BoxShape" id=14]
+extents = Vector3( 0.208554, 0.20857, 0.129661 )
+
+[sub_resource type="BoxShape" id=15]
+margin = 0.3
+extents = Vector3( 0.088677, 0.139118, 0.0733429 )
+
+[sub_resource type="BoxShape" id=16]
+extents = Vector3( 0.0902065, 0.0282918, 0.104991 )
+
+[node name="Model" type="Spatial"]
+
+[node name="Mesh" parent="." instance=ExtResource( 6 )]
+
+[node name="FinalModel_Noarms" parent="Mesh/rig/Skeleton" index="0"]
+material/0 = ExtResource( 4 )
+
+[node name="LowerLegL" type="BoneAttachment" parent="Mesh/rig/Skeleton" index="1"]
+transform = Transform( -0.999597, -0.00250116, -0.0282816, -0.000253235, -0.995287, 0.0969717, -0.0283908, 0.0969397, 0.994886, -0.149292, 0.40319, -0.0227423 )
+bone_name = "defshin_l_1"
+
+[node name="RemoteTransform" type="RemoteTransform" parent="Mesh/rig/Skeleton/LowerLegL"]
+transform = Transform( 1, 0, 0, 0, 0.999999, 0, 0, 0, 1, 0, 0, 0 )
+remote_path = NodePath("../../../../../ModelShape/LowerLegL")
+
+[node name="LowerLegR" type="BoneAttachment" parent="Mesh/rig/Skeleton" index="2"]
+transform = Transform( -0.999597, 0.00250126, 0.0283021, 0.000255142, -0.995287, 0.096972, 0.0284112, 0.0969399, 0.994885, 0.149292, 0.40319, -0.0227423 )
+bone_name = "defshin_r_1"
+
+[node name="RemoteTransform" type="RemoteTransform" parent="Mesh/rig/Skeleton/LowerLegR"]
+remote_path = NodePath("../../../../../ModelShape/LowerLegR")
+
+[node name="CloakAttachment" type="BoneAttachment" parent="Mesh/rig/Skeleton" index="3"]
+transform = Transform( -1, -1.28047e-07, -6.75745e-07, -3.38313e-08, 0.990485, -0.137622, 6.86937e-07, -0.137622, -0.990485, 5.08522e-09, 2.27007, -0.0623129 )
+bone_name = "defspine_4"
+
+[node name="UpperLegL" type="BoneAttachment" parent="Mesh/rig/Skeleton" index="4"]
+transform = Transform( -0.997062, 0.0028514, -0.0765424, -0.00493528, -0.999622, 0.0270498, -0.0764362, 0.027348, 0.9967, -0.149388, 1.02891, -0.0618984 )
+bone_name = "defthigh_l_1"
+
+[node name="RemoteTransform" type="RemoteTransform" parent="Mesh/rig/Skeleton/UpperLegL"]
+remote_path = NodePath("../../../../../ModelShape/UpperLegL")
+
+[node name="UpperLegR" type="BoneAttachment" parent="Mesh/rig/Skeleton" index="5"]
+transform = Transform( -0.997068, -0.00285139, 0.0764714, 0.00493333, -0.999622, 0.02705, 0.0763653, 0.0273479, 0.996705, 0.149388, 1.02891, -0.0618984 )
+bone_name = "defthigh_r_1"
+
+[node name="RemoteTransform" type="RemoteTransform" parent="Mesh/rig/Skeleton/UpperLegR"]
+remote_path = NodePath("../../../../../ModelShape/UpperLegR")
+
+[node name="Spine0" type="BoneAttachment" parent="Mesh/rig/Skeleton" index="6"]
+transform = Transform( -1, -8.39984e-08, -6.47429e-07, -7.75779e-08, 0.999951, -0.00991058, 6.4823e-07, -0.00991052, -0.999951, 2.46233e-08, 1.38255, -0.0699193 )
+bone_name = "defspine"
+
+[node name="RemoteTransform" type="RemoteTransform" parent="Mesh/rig/Skeleton/Spine0"]
+remote_path = NodePath("../../../../../ModelShape/Spine0")
+
+[node name="Spine1" type="BoneAttachment" parent="Mesh/rig/Skeleton" index="7"]
+transform = Transform( -1, -4.03691e-08, -6.04411e-07, -3.70983e-08, 0.999985, -0.00541066, 6.0462e-07, -0.00541061, -0.999985, 7.67249e-09, 1.58434, -0.0719192 )
+bone_name = "defspine_1"
+
+[node name="RemoteTransform" type="RemoteTransform" parent="Mesh/rig/Skeleton/Spine1"]
+remote_path = NodePath("../../../../../ModelShape/Spine1")
+
+[node name="Spine2" type="BoneAttachment" parent="Mesh/rig/Skeleton" index="8"]
+transform = Transform( -1, 1.03659e-08, -3.46905e-07, -6.75357e-10, 0.999494, 0.0318126, 3.47059e-07, 0.0318126, -0.999494, 1.78431e-10, 1.76997, -0.0729236 )
+bone_name = "defspine_2"
+
+[node name="RemoteTransform" type="RemoteTransform" parent="Mesh/rig/Skeleton/Spine2"]
+remote_path = NodePath("../../../../../ModelShape/Spine2")
+
+[node name="Spine3" type="BoneAttachment" parent="Mesh/rig/Skeleton" index="9"]
+transform = Transform( -1, 9.30901e-09, -3.16423e-07, 5.60894e-09, 0.999932, 0.0116913, 3.1651e-07, 0.0116914, -0.999932, 2.63184e-09, 2.00654, -0.0653942 )
+bone_name = "defspine_3"
+
+[node name="RemoteTransform" type="RemoteTransform" parent="Mesh/rig/Skeleton/Spine3"]
+remote_path = NodePath("../../../../../ModelShape/Spine3")
+
+[node name="Spine4" type="BoneAttachment" parent="Mesh/rig/Skeleton" index="10"]
+transform = Transform( -1, -1.28047e-07, -6.75745e-07, -3.38313e-08, 0.990485, -0.137622, 6.86937e-07, -0.137622, -0.990485, 5.08522e-09, 2.27007, -0.0623129 )
+bone_name = "defspine_4"
+
+[node name="RemoteTransform" type="RemoteTransform" parent="Mesh/rig/Skeleton/Spine4"]
+transform = Transform( 1, 9.66226e-08, -1.13064e-08, -9.40609e-08, 0.989996, 0.141091, 2.48261e-08, -0.141091, 0.989996, -0.112461, -0.0176766, 0.00245583 )
+remote_path = NodePath("../../../../../ModelShape/Spine4R")
+
+[node name="RemoteTransform2" type="RemoteTransform" parent="Mesh/rig/Skeleton/Spine4"]
+transform = Transform( 1, 9.66226e-08, -1.13064e-08, -9.40609e-08, 0.989996, 0.141091, 2.48261e-08, -0.141091, 0.989996, 0.112, -0.018, 0.002 )
+remote_path = NodePath("../../../../../ModelShape/Spine4L")
+
+[node name="Neck" type="BoneAttachment" parent="Mesh/rig/Skeleton" index="11"]
+transform = Transform( -1, -6.0802e-08, -1.37763e-07, -3.40277e-08, 0.982436, -0.1866, 1.46689e-07, -0.1866, -0.982437, -5.79906e-09, 2.35426, -0.0740111 )
+bone_name = "defspine_5"
+
+[node name="RemoteTransform" type="RemoteTransform" parent="Mesh/rig/Skeleton/Neck"]
+remote_path = NodePath("../../../../../ModelShape/Neck")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 8 )
+anim_player = NodePath("../Mesh/AnimationPlayer")
+active = true
+root_motion_track = NodePath("Armature/Skeleton:ctr_master")
+parameters/is_idle/blend_amount = 0.0
+parameters/is_pushing/blend_amount = 0.0
+parameters/run_speed/blend_position = 0.0
+
+[node name="AnimController" type="Node" parent="."]
+script = ExtResource( 2 )
+is_jumping = false
+is_on_air = false
+is_pushing = false
+is_idle = false
+move_speed = 0.0
+
+[node name="Cloak" type="SoftBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26588, -0.0711746 )
+mesh = ExtResource( 1 )
+skeleton = NodePath("")
+material/0 = ExtResource( 5 )
+collision_layer = 0
+collision_mask = 5
+simulation_precision = 20
+total_mass = 0.01
+linear_stiffness = 0.2
+areaAngular_stiffness = 0.2
+volume_stiffness = 0.2
+ray_pickable = false
+pinned_points = [ 158, 154, 3, 6, 8, 79, 162, 75, 5, 1, 155, 208, 159, 163, 164, 216, 86, 85, 11, 12, 10 ]
+attachments/0/point_index = 158
+attachments/0/spatial_attachment_path = NodePath("")
+attachments/0/offset = Vector3( 0.154702, 0.0478145, 0.0596358 )
+attachments/1/point_index = 154
+attachments/1/spatial_attachment_path = NodePath("")
+attachments/1/offset = Vector3( 0.11744, 0.0316647, -0.095107 )
+attachments/2/point_index = 3
+attachments/2/spatial_attachment_path = NodePath("")
+attachments/2/offset = Vector3( -0.0667169, 0.027917, -0.104132 )
+attachments/3/point_index = 6
+attachments/3/spatial_attachment_path = NodePath("../Mesh/rig/Skeleton/CloakAttachment")
+attachments/3/offset = Vector3( -0.153778, 0.0347265, -0.0622741 )
+attachments/4/point_index = 8
+attachments/4/spatial_attachment_path = NodePath("../Mesh/rig/Skeleton/CloakAttachment")
+attachments/4/offset = Vector3( -0.162646, 0.0398591, -0.00285915 )
+attachments/5/point_index = 79
+attachments/5/spatial_attachment_path = NodePath("../Mesh/rig/Skeleton/CloakAttachment")
+attachments/5/offset = Vector3( -0.147724, 0.0818411, 0.00377131 )
+attachments/6/point_index = 162
+attachments/6/spatial_attachment_path = NodePath("../Mesh/rig/Skeleton/CloakAttachment")
+attachments/6/offset = Vector3( 0.153704, 0.0347265, -0.0622739 )
+attachments/7/point_index = 75
+attachments/7/spatial_attachment_path = NodePath("../Mesh/rig/Skeleton/CloakAttachment")
+attachments/7/offset = Vector3( -0.134518, 0.0390426, -0.0836868 )
+attachments/8/point_index = 5
+attachments/8/spatial_attachment_path = NodePath("../Mesh/rig/Skeleton/CloakAttachment")
+attachments/8/offset = Vector3( -0.117514, 0.0316647, -0.0951071 )
+attachments/9/point_index = 1
+attachments/9/spatial_attachment_path = NodePath("../Mesh/rig/Skeleton/CloakAttachment")
+attachments/9/offset = Vector3( -3.69258e-05, 0.0271832, -0.107466 )
+attachments/10/point_index = 155
+attachments/10/spatial_attachment_path = NodePath("../Mesh/rig/Skeleton/CloakAttachment")
+attachments/10/offset = Vector3( 0.0666431, 0.027917, -0.104132 )
+attachments/11/point_index = 208
+attachments/11/spatial_attachment_path = NodePath("../Mesh/rig/Skeleton/CloakAttachment")
+attachments/11/offset = Vector3( 0.134444, 0.0390426, -0.0836866 )
+attachments/12/point_index = 159
+attachments/12/spatial_attachment_path = NodePath("../Mesh/rig/Skeleton/CloakAttachment")
+attachments/12/offset = Vector3( 0.162572, 0.0398591, -0.00285894 )
+attachments/13/point_index = 163
+attachments/13/spatial_attachment_path = NodePath("../Mesh/rig/Skeleton/CloakAttachment")
+attachments/13/offset = Vector3( 0.13453, 0.0551, 0.0855851 )
+attachments/14/point_index = 164
+attachments/14/spatial_attachment_path = NodePath("../Mesh/rig/Skeleton/CloakAttachment")
+attachments/14/offset = Vector3( 0.117138, 0.050352, 0.0965297 )
+attachments/15/point_index = 216
+attachments/15/spatial_attachment_path = NodePath("../Mesh/rig/Skeleton/CloakAttachment")
+attachments/15/offset = Vector3( 0.0662719, 0.0486995, 0.104022 )
+attachments/16/point_index = 86
+attachments/16/spatial_attachment_path = NodePath("../Mesh/rig/Skeleton/CloakAttachment")
+attachments/16/offset = Vector3( -3.70729e-05, 0.0488412, 0.106133 )
+attachments/17/point_index = 85
+attachments/17/spatial_attachment_path = NodePath("../Mesh/rig/Skeleton/CloakAttachment")
+attachments/17/offset = Vector3( -0.0663461, 0.0486995, 0.104022 )
+attachments/18/point_index = 11
+attachments/18/spatial_attachment_path = NodePath("../Mesh/rig/Skeleton/CloakAttachment")
+attachments/18/offset = Vector3( -0.117212, 0.050352, 0.0965295 )
+attachments/19/point_index = 12
+attachments/19/spatial_attachment_path = NodePath("../Mesh/rig/Skeleton/CloakAttachment")
+attachments/19/offset = Vector3( -0.134604, 0.0551, 0.0855849 )
+attachments/20/point_index = 10
+attachments/20/spatial_attachment_path = NodePath("../Mesh/rig/Skeleton/CloakAttachment")
+attachments/20/offset = Vector3( -0.154775, 0.0478145, 0.0596356 )
+script = ExtResource( 3 )
+
+[node name="ModelShape" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4174, -0.0784801 )
+collision_layer = 2147483652
+collision_mask = 0
+
+[node name="LowerLegL" type="CollisionShape" parent="ModelShape"]
+transform = Transform( -0.999597, -0.00250116, -0.0282816, -0.000253235, -0.995286, 0.0969717, -0.0283908, 0.0969396, 0.994886, -0.149292, -1.01421, 0.0557377 )
+shape = SubResource( 9 )
+
+[node name="UpperLegL" type="CollisionShape" parent="ModelShape"]
+transform = Transform( -0.997062, 0.0028514, -0.0765424, -0.00493528, -0.999622, 0.0270498, -0.0764362, 0.027348, 0.9967, -0.149388, -0.388494, 0.0165817 )
+shape = SubResource( 10 )
+
+[node name="UpperLegR" type="CollisionShape" parent="ModelShape"]
+transform = Transform( -0.997068, -0.00285139, 0.0764714, 0.00493333, -0.999622, 0.02705, 0.0763653, 0.0273479, 0.996705, 0.149388, -0.388494, 0.0165817 )
+shape = SubResource( 10 )
+
+[node name="LowerLegR" type="CollisionShape" parent="ModelShape"]
+transform = Transform( -0.999597, 0.00250126, 0.0283021, 0.000255142, -0.995287, 0.096972, 0.0284112, 0.0969399, 0.994885, 0.149292, -1.01421, 0.0557377 )
+shape = SubResource( 9 )
+
+[node name="Spine0" type="CollisionShape" parent="ModelShape"]
+transform = Transform( -1, -8.39984e-08, -6.47429e-07, -7.75779e-08, 0.999951, -0.00991058, 6.4823e-07, -0.00991052, -0.999951, 2.46233e-08, -0.0348531, 0.00856078 )
+shape = SubResource( 11 )
+
+[node name="Spine1" type="CollisionShape" parent="ModelShape"]
+transform = Transform( -1, -4.03691e-08, -6.04411e-07, -3.70983e-08, 0.999985, -0.00541066, 6.0462e-07, -0.00541061, -0.999985, 7.67249e-09, 0.166937, 0.00656085 )
+shape = SubResource( 12 )
+
+[node name="Spine2" type="CollisionShape" parent="ModelShape"]
+transform = Transform( -1, 1.03659e-08, -3.46905e-07, -6.75357e-10, 0.999494, 0.0318126, 3.47059e-07, 0.0318126, -0.999494, 1.78431e-10, 0.352573, 0.00555643 )
+shape = SubResource( 13 )
+
+[node name="Spine3" type="CollisionShape" parent="ModelShape"]
+transform = Transform( -1, 9.30901e-09, -3.16423e-07, 5.60894e-09, 0.999932, 0.0116913, 3.1651e-07, 0.0116914, -0.999932, 2.63184e-09, 0.589135, 0.0130859 )
+shape = SubResource( 14 )
+
+[node name="Neck" type="CollisionShape" parent="ModelShape"]
+transform = Transform( -1, -6.0802e-08, -1.37763e-07, -3.40277e-08, 0.982436, -0.1866, 1.46689e-07, -0.1866, -0.982437, -5.79906e-09, 0.93686, 0.00446898 )
+shape = SubResource( 15 )
+
+[node name="Spine4L" type="CollisionShape" parent="ModelShape"]
+transform = Transform( -1, -1.28047e-07, -6.75745e-07, -1.30414e-07, 0.999994, 0.00350319, 6.75292e-07, 0.00350335, -0.999994, -0.112, 0.834563, 0.0166635 )
+shape = SubResource( 16 )
+
+[node name="Spine4R" type="CollisionShape" parent="ModelShape"]
+transform = Transform( -1, -1.28047e-07, -6.75745e-07, -1.30414e-07, 0.999994, 0.00350319, 6.75292e-07, 0.00350335, -0.999994, 0.112461, 0.834821, 0.0161673 )
+shape = SubResource( 16 )
+
+[editable path="Mesh"]

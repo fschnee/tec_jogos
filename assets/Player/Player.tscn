@@ -1,0 +1,89 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://game/Player/States/NormalMovement.gd" type="Script" id=1]
+[ext_resource path="res://assets/Player/meshes/Model.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game/Player/States/Empty.gd" type="Script" id=3]
+[ext_resource path="res://game/Player/States/AgainstPushable.gd" type="Script" id=4]
+[ext_resource path="res://game/Player/Controller.gd" type="Script" id=5]
+[ext_resource path="res://assets/debug/DebugArrow.tscn" type="PackedScene" id=6]
+
+[sub_resource type="SphereShape" id=1]
+margin = 0.001
+
+[sub_resource type="SphereShape" id=2]
+radius = 0.945976
+
+[sub_resource type="SphereShape" id=3]
+radius = 8.0
+
+[node name="Controller" type="KinematicBody"]
+collision_layer = 2
+collision/safe_margin = 0.04
+script = ExtResource( 5 )
+
+[node name="Lifter" type="CollisionShape" parent="."]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.5, -0.00902224, 0.745916, 0.00126863 )
+shape = SubResource( 1 )
+
+[node name="Bumper" type="CollisionShape" parent="."]
+transform = Transform( 0.6, 0, 0, 0, 1.2, 0, 0, 0, 0.6, 0, 2.16077, 0 )
+shape = SubResource( 2 )
+
+[node name="FloorTolerance" type="RayCast" parent="."]
+enabled = true
+cast_to = Vector3( 0, -0.45, 0 )
+
+[node name="FloorDistanceDetector" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+enabled = true
+cast_to = Vector3( 0, -25.5, 0 )
+
+[node name="PullLink" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.48371, -0.0812033 )
+enabled = true
+
+[node name="AttractArea" type="Area" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="AttractArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.57504, 0 )
+shape = SubResource( 3 )
+
+[node name="States" type="Node" parent="."]
+
+[node name="AgainstPushable" type="Node" parent="States"]
+script = ExtResource( 4 )
+
+[node name="NormalMovement" type="Node" parent="States"]
+script = ExtResource( 1 )
+
+[node name="PullingTimer" type="Timer" parent="States/NormalMovement"]
+one_shot = true
+
+[node name="Empty" type="Node" parent="States"]
+script = ExtResource( 3 )
+
+[node name="DebugGizmo" type="Spatial" parent="."]
+
+[node name="InertiaController" type="Spatial" parent="DebugGizmo"]
+
+[node name="Arrow" parent="DebugGizmo/InertiaController" instance=ExtResource( 6 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.6, -1.2 )
+
+[node name="DirectionalController" type="Spatial" parent="DebugGizmo"]
+
+[node name="Arrow" parent="DebugGizmo/DirectionalController" instance=ExtResource( 6 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.3, -1.2 )
+
+[node name="ModelGimbal" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32008, -0.0521088 )
+
+[node name="Model" parent="ModelGimbal" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.32008, 0.0521088 )
+[connection signal="being_pulled" from="." to="." method="_on_Controller_being_pulled"]
+[connection signal="entered_pullingarea" from="." to="States/NormalMovement" method="_on_Controller_entered_pullingarea"]
+[connection signal="exited_pullingarea" from="." to="States/NormalMovement" method="_on_Controller_exited_pullingarea"]
+[connection signal="stepped_into_noise_range_of_living_box" from="." to="States/NormalMovement" method="_on_Controller_stepped_into_noise_range_of_living_box"]
+[connection signal="stepped_out_of_noise_range_of_living_box" from="." to="States/NormalMovement" method="_on_Controller_stepped_out_of_noise_range_of_living_box"]
+[connection signal="timeout" from="States/NormalMovement/PullingTimer" to="States/NormalMovement" method="_on_PullingTimer_timeout"]

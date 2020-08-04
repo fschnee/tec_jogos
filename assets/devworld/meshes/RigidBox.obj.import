@@ -2,14 +2,14 @@
 
 importer="wavefront_obj"
 type="Mesh"
-path="res://.import/RigidBox.obj-1051814c8dde63b8054e902ab4a4f445.mesh"
+path="res://.import/RigidBox.obj-08d27ef6acabbfcbea927dd949d6f42c.mesh"
 
 [deps]
 
-files=[ "res://.import/RigidBox.obj-1051814c8dde63b8054e902ab4a4f445.mesh" ]
+files=[ "res://.import/RigidBox.obj-08d27ef6acabbfcbea927dd949d6f42c.mesh" ]
 
-source_file="res://assets/devworld/meshes/RigidBox.obj"
-dest_files=[ "res://.import/RigidBox.obj-1051814c8dde63b8054e902ab4a4f445.mesh", "res://.import/RigidBox.obj-1051814c8dde63b8054e902ab4a4f445.mesh" ]
+source_file="res://assets/Devworld/meshes/RigidBox.obj"
+dest_files=[ "res://.import/RigidBox.obj-08d27ef6acabbfcbea927dd949d6f42c.mesh", "res://.import/RigidBox.obj-08d27ef6acabbfcbea927dd949d6f42c.mesh" ]
 
 [params]
 

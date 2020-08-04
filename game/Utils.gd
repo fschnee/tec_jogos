@@ -18,7 +18,8 @@ static func look_at_local_with_interp(obj, target, time, up = Vector3.UP):
 	obj.global_transform = old_transform.interpolate_with(obj.global_transform, time)
 
 static func raycast_col_distance(raycast: RayCast):
-	return raycast.global_transform.origin.distance_to(raycast.get_collision_point())
+	return raycast.global_transform.origin.distance_to(raycast.get_collision_point()) \
+		if raycast.is_colliding() else raycast.cast_to.length()
 
 static func v2_to_v3(vec: Vector2) -> Vector3:
 	return Vector3(vec.x, 0, vec.y)

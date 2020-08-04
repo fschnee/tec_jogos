@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/CalmSpot.obj-b8159a267d99372a1b9b26ffcc75e0da.mesh"
+
+[deps]
+
+files=[ "res://.import/CalmSpot.obj-b8159a267d99372a1b9b26ffcc75e0da.mesh" ]
+
+source_file="res://assets/World/meshes/CalmSpot.obj"
+dest_files=[ "res://.import/CalmSpot.obj-b8159a267d99372a1b9b26ffcc75e0da.mesh", "res://.import/CalmSpot.obj-b8159a267d99372a1b9b26ffcc75e0da.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

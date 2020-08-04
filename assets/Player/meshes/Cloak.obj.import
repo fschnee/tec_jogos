@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Cloak.obj-64072420bad36226bc819b14621d431a.mesh"
+
+[deps]
+
+files=[ "res://.import/Cloak.obj-64072420bad36226bc819b14621d431a.mesh" ]
+
+source_file="res://assets/Player/meshes/Cloak.obj"
+dest_files=[ "res://.import/Cloak.obj-64072420bad36226bc819b14621d431a.mesh", "res://.import/Cloak.obj-64072420bad36226bc819b14621d431a.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

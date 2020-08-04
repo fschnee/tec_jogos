@@ -2,14 +2,14 @@
 
 importer="wavefront_obj"
 type="Mesh"
-path="res://.import/ArchSlide.obj-b9336fc3f64f47d4ef41ad602e07c2c8.mesh"
+path="res://.import/ArchSlide.obj-def7c741f42548f605c0ccdb5c48a63d.mesh"
 
 [deps]
 
-files=[ "res://.import/ArchSlide.obj-b9336fc3f64f47d4ef41ad602e07c2c8.mesh" ]
+files=[ "res://.import/ArchSlide.obj-def7c741f42548f605c0ccdb5c48a63d.mesh" ]
 
-source_file="res://assets/devworld/meshes/ArchSlide.obj"
-dest_files=[ "res://.import/ArchSlide.obj-b9336fc3f64f47d4ef41ad602e07c2c8.mesh", "res://.import/ArchSlide.obj-b9336fc3f64f47d4ef41ad602e07c2c8.mesh" ]
+source_file="res://assets/Devworld/meshes/ArchSlide.obj"
+dest_files=[ "res://.import/ArchSlide.obj-def7c741f42548f605c0ccdb5c48a63d.mesh", "res://.import/ArchSlide.obj-def7c741f42548f605c0ccdb5c48a63d.mesh" ]
 
 [params]
 

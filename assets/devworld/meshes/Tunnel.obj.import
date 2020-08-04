@@ -2,14 +2,14 @@
 
 importer="wavefront_obj"
 type="Mesh"
-path="res://.import/Tunnel.obj-35993b1359ed34fe9bd1750f904cc7e2.mesh"
+path="res://.import/Tunnel.obj-db3a05ba8eb294d19f42859a2651300c.mesh"
 
 [deps]
 
-files=[ "res://.import/Tunnel.obj-35993b1359ed34fe9bd1750f904cc7e2.mesh" ]
+files=[ "res://.import/Tunnel.obj-db3a05ba8eb294d19f42859a2651300c.mesh" ]
 
-source_file="res://assets/devworld/meshes/Tunnel.obj"
-dest_files=[ "res://.import/Tunnel.obj-35993b1359ed34fe9bd1750f904cc7e2.mesh", "res://.import/Tunnel.obj-35993b1359ed34fe9bd1750f904cc7e2.mesh" ]
+source_file="res://assets/Devworld/meshes/Tunnel.obj"
+dest_files=[ "res://.import/Tunnel.obj-db3a05ba8eb294d19f42859a2651300c.mesh", "res://.import/Tunnel.obj-db3a05ba8eb294d19f42859a2651300c.mesh" ]
 
 [params]
 

@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://game/common/GameCamera.gd" type="Script" id=1]
+
+
+
+[node name="CameraArm" type="Spatial"]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0 )
+script = ExtResource( 1 )
+distance = 30.0
+camera_angle = -54.736
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.577345, 0.816501, 0, -0.816501, 0.577345, 0, 24.495, 17.3203 )
+projection = 1
+current = true
+size = 30.0
+
+[node name="Tween" type="Tween" parent="."]

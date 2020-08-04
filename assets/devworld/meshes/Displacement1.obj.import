@@ -2,14 +2,14 @@
 
 importer="wavefront_obj"
 type="Mesh"
-path="res://.import/Displacement1.obj-5e8f52532f051e6f20e5eed737d57e56.mesh"
+path="res://.import/Displacement1.obj-b96a04569091bf6221d00e2e6e635db2.mesh"
 
 [deps]
 
-files=[ "res://.import/Displacement1.obj-5e8f52532f051e6f20e5eed737d57e56.mesh" ]
+files=[ "res://.import/Displacement1.obj-b96a04569091bf6221d00e2e6e635db2.mesh" ]
 
-source_file="res://assets/devworld/meshes/Displacement1.obj"
-dest_files=[ "res://.import/Displacement1.obj-5e8f52532f051e6f20e5eed737d57e56.mesh", "res://.import/Displacement1.obj-5e8f52532f051e6f20e5eed737d57e56.mesh" ]
+source_file="res://assets/Devworld/meshes/Displacement1.obj"
+dest_files=[ "res://.import/Displacement1.obj-b96a04569091bf6221d00e2e6e635db2.mesh", "res://.import/Displacement1.obj-b96a04569091bf6221d00e2e6e635db2.mesh" ]
 
 [params]
 
